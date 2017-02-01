@@ -52,8 +52,7 @@ public class TaxiRideStreamingJob {
         DataStream<TaxiRide> filtered = rides.filter(new FilterFunction<TaxiRide>() {
             @Override
             public boolean filter(TaxiRide theTaxiRide) {
-                if (theTaxiRide.isStart) return GeoUtils.isInNYC(theTaxiRide.startLon, theTaxiRide.startLat);
-                else return GeoUtils.isInNYC(theTaxiRide.endLon, theTaxiRide.endLat);
+                return GeoUtils.isInNYC(theTaxiRide.startLon, theTaxiRide.startLat) && GeoUtils.isInNYC(theTaxiRide.endLon, theTaxiRide.endLat);
             }
         });
 
